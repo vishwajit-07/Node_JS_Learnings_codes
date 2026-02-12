@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%- include('navbar.ejs') %>
+
+<div class="container mt-5">
+  <% about.map(item => { %>
+    <div class="card shadow p-4">
+      <h2 class="text-center mb-3"><%= item.heading %></h2>
+      <p class="lead"><%= item.intro %></p>
+      <p><%= item.description %></p>
+
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <h5>Strengths</h5>
+          <ul class="list-group">
+            <% item.strengths.map(strength => { %>
+              <li class="list-group-item"><%= strength %></li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+          <h5>Hobbies</h5>
+          <ul class="list-group">
+            <% item.hobbies.map(hobby => { %>
+              <li class="list-group-item"><%= hobby %></li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
