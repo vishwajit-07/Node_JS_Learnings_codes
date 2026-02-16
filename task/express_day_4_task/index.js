@@ -30,7 +30,6 @@ app.get("/project", (req, res) => {
     {
       id: 1,
       title: "Community Connect",
-      image: "/images/community.jpg",
       description:
         "A platform that connects people within a community to share updates, events, and resources.",
       technologies: ["Node.js", "Express.js", "MongoDB", "EJS", "Bootstrap"],
@@ -38,7 +37,6 @@ app.get("/project", (req, res) => {
     {
       id: 2,
       title: "Job Portal",
-      image: "/images/jobportal.jpg",
       description:
         "An online job portal where employers can post jobs and candidates can apply for them.",
       technologies: ["Node.js", "Express.js", "MongoDB", "EJS", "CSS"],
@@ -46,7 +44,6 @@ app.get("/project", (req, res) => {
     {
       id: 3,
       title: "Appointment Management System",
-      image: "/images/appointment.jpg",
       description:
         "A system for booking and managing appointments between users and service providers.",
       technologies: ["Node.js", "Express.js", "MongoDB", "EJS", "Bootstrap"],
@@ -92,7 +89,7 @@ app.get("/contact", (req, res) => {
   res.render("contact.ejs", { contact });
 });
 
-app.get("/about", (req,res) => {
+app.get("/about", (req, res) => {
   const about = [
     {
       id: 1,
@@ -120,11 +117,11 @@ app.get("/about", (req,res) => {
   res.render("about.ejs", { about });
 });
 
-app.use((req,res)=>{
-    res.render('not_found.ejs');
-})
+app.use((req, res) => {
+  res.render("not_found.ejs");
+});
 const PORT = 3000;
-const HOST = '127.0.0.1'
-app.listen(PORT,HOST,()=>{
-    console.log(`Server is upp on http://${HOST}:${PORT}`);
-})
+const HOST = "127.0.0.1";
+app.listen(PORT, HOST, () => {
+  console.log(`Server is upp on http://${HOST}:${PORT}`);
+});
