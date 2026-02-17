@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home - Product Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        padding: 40px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .product-card {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: auto;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+      }
+
+      .label {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .value {
+        color: #555;
+      }
+
+      img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Product Full Details</h2>
+
+    <div class="product-card">
+      <a href="/">Add product</a>
+
+      <div class="row">
+        <span class="label">Product Name:</span>
+        <span class="value"><%= data.product_name %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Product ID:</span>
+        <span class="value"><%= data.product_id %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Category:</span>
+        <span class="value"><%= data.category %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Brand:</span>
+        <span class="value"><%= data.brand %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Price:</span>
+        <span class="value"><%= data.price %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Quantity:</span>
+        <span class="value"><%= data.quantity %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Description:</span>
+        <span class="value"><%= data.description %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">SKU:</span>
+        <span class="value"><%= data.sku %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Weight:</span>
+        <span class="value"><%= data.weight %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Dimensions:</span>
+        <span class="value"><%= data.dimensions %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Manufacture Date:</span>
+        <span class="value"><%= data.manufacture_date %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Expiry Date:</span>
+        <span class="value"><%= data.expiry_date %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Supplier Name:</span>
+        <span class="value"><%= data.supplier_name %></span>
+      </div>
+
+      <div class="row">
+        <span class="label">Supplier Contact:</span>
+        <span class="value"><%= data.supplier_contact %></span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Detail Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 20px 25px;
+      width: 600px;
+      max-width: 95%;
+      border-radius: 6px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #444;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      padding: 8px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>Product Detail Form</h2>
+
+    <form method="POST" action="/saveform">
+      <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" name="product_name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Product ID</label>
+        <input type="text" name="product_id" required />
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <select name="category" required>
+          <option value="">Select Category</option>
+          <option>Electronics</option>
+          <option>Clothing</option>
+          <option>Furniture</option>
+          <option>Food</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Brand</label>
+        <input type="text" name="brand" required />
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" name="price" required />
+      </div>
+
+      <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" name="quantity" required />
+      </div>
+
+      <div class="form-group full-width">
+        <label>Description</label>
+        <textarea name="description" rows="2" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>SKU</label>
+        <input type="text" name="sku" required />
+      </div>
+
+      <div class="form-group">
+        <label>Weight</label>
+        <input type="number" step="0.01" name="weight" required />
+      </div>
+
+      <div class="form-group">
+        <label>Dimensions</label>
+        <input type="text" name="dimensions" required />
+      </div>
+
+      <div class="form-group">
+        <label>Manufacture Date</label>
+        <input type="date" name="manufacture_date" required />
+      </div>
+
+      <div class="form-group">
+        <label>Expiry Date</label>
+        <input type="date" name="expiry_date" required />
+      </div>
+
+      <div class="form-group">
+        <label>Supplier Name</label>
+        <input type="text" name="supplier_name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Supplier Contact</label>
+        <input type="tel" name="supplier_contact" required />
+      </div>
+
+      <div class="form-group full-width">
+        <button type="submit">Submit Product</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
