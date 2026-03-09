@@ -1,7 +1,79 @@
-what is nodejs?
+what is nodejs? server
 what are features
 how to create nodejs server
 http
 modules-types
-what is express js
+what is express js server
+middleware types example url, static files, post method middleware
 difference express and node
+form handeling 
+difference between SQL and NOSQL
+what is monodb features
+1) scalablitiy sharding distribute data to multiple servers
+2) Unstructured data stired in collection called documents
+3) schema less
+4) Replication (copies for backup) and sharding (data distribute in different servers)
+
+what is aggregation in mongodb
+filtering,grouping, summarizing, sorting, reshaping
+
+CSS_
+Selector
+box model
+Flexbox
+media query
+positoning and it types
+z-index
+display:none and visbility:hidden
+JS-variables0 var et const and hoisting
+data types-
+typeof
+
+ternary, nullish coalscheing op
+type conversion
+forEach, map
+
+Fat arrow function
+IIFE- self invoking function
+callback function
+HOF
+
+object-
+
+array-shift unshioft, push pop, slice splcie, join, to String,includes, 
+
+filter, find,,- actual values
+
+ some / every- boolean value
+reduce
+string- split()
+logical questions
+
+DOM- most important
+
+BOM- dialog boxed- alert prompt confirm
+Modern JS-
+sync-Async Prograaming
+
+callback funcrtion- problem- callback hell-solution- promises- async await
+
+spread operator
+rest operator
+destrucrting
+closure
+event loopong / event progrpagtion
+currying
+polyfills
+shallow copy /deep copy
+call apply bind
+debouncing / Throttling
+
+function scopr / block scope
+set Timeout vs setIntervak
+
+session managament
+optional chaining
+
+Memoization
+
+OOPs

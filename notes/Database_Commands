@@ -1,0 +1,118 @@
+
+show dbs :-  view databases
+use database_name :- create and switch to database
+show collections :- to view all collections in the database
+db.createCollection("user") :- to create collection
+db.user.drop() :- Delete collection
+db.dropDatabase() :- For delete database
+
+CRUD
+create(Insert) :-
+1) insertOne, 2)insertMany
+
+ex:- db.user.insertOne({"name":"Vishwajit","skill":"MERNSTACK"})
+     db.user.insertOne([{"name":"Vishwajit","skill":"MERNSTACK"},{"name":"Kedar","skill":"Python"}])
+
+Read operation :-
+1) find, 2) findOne
+Ex:- db.user.findOne({"role":"Developer"}) It returns first found role = Developer
+
+Ex:- db.user.find({"role":"Developer"}) It returns all found role = Developer
+
+Ex:- db.user.find({"role":"Developer"},{name:1,email:1,_id:0})    :1 means want only that perticular field data :0 dont want
+
+Delete 
+1) deleteOne, 2) deleteMany
+
+Ex:- db.user.deleteOne({"role":"Developer"})  delete only one on first found
+Ex:- db.user.deleteMany({"role":"Developer"})  delete all having role developer
+
+
+Update :-
+1) updateOne, 2) updateMany
+
+updateOne()
+
+$set method- used to add new field or to change existing field data
+$unset- used tp remove field
+
+updateMany()
+
+
+db.user.updateOne({"name":"John Doe"},{$set:{"city":"California"}})
+db.user.updateOne({"name":"John Doe"},{$set:{"role":"MERN Stack Engineer"}})
+
+db.user.updateMany({"city":"New York"},{$set:{"role":"Developers"}})
+
+
+
+
+db.user.updateOne({},{$set:{"isOnRole":true}})
+
+db.user.updateMany({},{$set:{"isOnRole":true}})
+
+// $unset
+db.user.updateMany({},{$unset:{"role":""}})
+
+//
+db.user.updateOne({"name":"Jeff"},{$unset:{"city":""}})
+
+
+
+db.user.updateMany({},{$set:{"skills":["React","JS","Next JS","AI"]}})
+
+// $push $pull- used in array to add orremvoe elements
+
+db.user.updateOne({"name":"Jeff"},{$set:{"skills":"Node JS"}})
+
+
+
+
+db.user.updateOne({"name":"ANdrew"},{$push:{"skills":"Express JS"}})
+
+db.user.updateOne({"name":"ANdrew"},{$pull:{"skills":"Next JS"}})
+
+
+
+db.user.updateOne({},{$push:{"skills":{$each:["tailwindcss","Redux"]}}})
+
+db.user.updateMany({},{$pull:{"skills":{$in:["AI","JS"]}}})
+
+db.Users.updateMany(
+  {},
+  { $pull: { skills: { $in: ["ReactJS", "AWS"] } } }
+);
+
+
+
+internally store data in mongo db in BSON
+it similar to json but it support multiple datatype like date objectId decimal128
+
+onject ID generate 12 byte including timestamp
+
+db.user.updateMany({},{$push:{"skills":{$each:["HTML","CSS"]}}})
+
+
+$gt
+$gte  greater than or equal
+$lt   less than
+$lte  less than or equal to
+$ne   not equal
+
+db.emp.find({$and:[{"city":{$eq:"Pune"}},{"salary":{$gt:40000}}]})
+
+db.emp.find({"age":{$not:{$gte:30}}})
+
+countDocuments()  it returns the count of the documents in the collection
+
+countDocuments({condition like age:20}) returns count of age 20
+
+sort 1 accending
+-1 decending
+db.emp.find().sort({experience:1})
+
+regex :- db.emp.find({name:{$regex:"^P"}}) start with P
+	db.emp.find({name:{$regex:"P$"}}) ends with P
+	
+	
+indexing :- db.collection_name.createIndex()

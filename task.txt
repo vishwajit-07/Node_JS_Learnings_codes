@@ -1,0 +1,134 @@
+### 🔹 **INSERT**
+
+1. Insert one student record with your own details.
+command :- 
+db.user.insertOne({
+    name:"Vishwajit Vijay Mavalankar",
+    age:24,
+    email:"vishwajitmavalankar54339@gmail.com",
+    course:"MERNSTACK",
+    batch:"B902"
+})
+2. Insert two student records together using `insertMany()`.
+command :-
+db.user.insertMany([
+  {
+    name: "Akil Ramchandra Jadhav",
+    age: 22,
+    email: "[akiljadhav@example.com](mailto:akiljadhav@example.com)",
+    course: "UI/UX Design",
+    batch: "B001",
+    mentor: "Pratik Sabale",
+    joiningDate: "2024-09-01",
+    fees: 12000,
+    status: "inactive",
+    skills: ["HTML", "CSS", "JavaScript"],
+    attendance: 90,
+  },
+  {
+    name: "Sushant Bhosale",
+    age: 21,
+    email: "[sushantbhosale@example.com](mailto:sushantbhosale@example.com)",
+    course: "React JS",
+    batch: "B002",
+    mentor: "Pratik Sabale",
+    joiningDate: "2024-08-15",
+    fees: 11000,
+    status: "active",
+    skills: ["Python", "Flask", "MySQL"],
+    attendance: 95,
+  }
+]);
+3. Insert one student whose course is **ReactJS** and mentor is **Pratik Sabale**.
+commands :- db.user.insertOne({
+    name: "Sushant Bhosale",
+    age: 21,
+    email: "[sushantbhosale@example.com](mailto:sushantbhosale@example.com)",
+    course: "React JS",
+    batch: "B002",
+    mentor: "Pratik Sabale",
+    joiningDate: "2024-08-15",
+    fees: 11000,
+    status: "active",
+    skills: ["Python", "Flask", "MySQL"],
+    attendance: 95,
+  })
+
+4. Insert one student whose course is **UI/UX Design** and status is **inactive**.
+command :-
+db.user.insertOne(
+  {
+    name: "Akil Ramchandra Jadhav",
+    age: 22,
+    email: "[akiljadhav@example.com](mailto:akiljadhav@example.com)",
+    course: "UI/UX Design",
+    batch: "B001",
+    mentor: "Pratik Sabale",
+    joiningDate: "2024-09-01",
+    fees: 12000,
+    status: "inactive",
+    skills: ["HTML", "CSS", "JavaScript"],
+    attendance: 90,
+  })
+
+### 🔹 **FIND**
+
+1. Display all students in the collection.
+command :- 
+    db.user.find()
+
+2. Display only the names and courses of all students.
+command :-
+    db.students.find({},{name:1,email:1,_id:0})
+
+3. Find all students where the course is **ReactJS**.
+command :-
+    db.students.find({"course":"ReactJS"})
+
+4. Find all students where the status is **active**.
+command:-
+    db.students.find({"status":"active"})
+
+5. Display only the names and mentors of all students.
+command :-
+    db.user.find({},{name:1,mentor:1})
+
+6. Find all students whose mentor is **Pratik Sabale**.
+command :- 
+    db.students.find({mentor:"Pratik Sabale"})
+
+7. Find all students whose batch code is **B001**.
+command :-
+    db.students.find({batch:B001})
+
+8. Find all students whose course is **MERN Stack**.
+command :-    
+    db.students.find({course:"MERN Stack"})
+
+9. Display only the name, email, and course of all students.
+command :-
+    db.students.find({},{name:1,email:1,course:1})
+
+10. Find all students whose mentor is **Rutvij Joshi** and show only their names.
+command :-
+    db.students.find({mentor:"Rutvij Joshi"},{name:1})
+
+---
+
+### 🔹 **DELETE**
+
+1. Delete one student using their name.
+command :-
+    db.students.deleteOne({name:"Vishwajit"})
+
+2. Delete all students whose status is **inactive**.
+command :-
+    db.students.deleteMany({status:"inactive"})
+
+3. Delete all students whose mentor is **Rutvij Joshi**.
+command :-
+    db.students.deleteMany({mentor:"Rutvij Joshi"})
+
+4. Delete all student records from the collection.
+command :-
+    db.student.deleteMany({})
