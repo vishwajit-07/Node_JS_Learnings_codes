@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/style.css">
+  </head>
+  <body>
+    <%- include("partials/header") %>
+
+    <div class="container">
+      <div class="card" style="text-align: center">
+        <h2>Dashboard</h2>
+
+        <p>Welcome to Instagram Admin Panel</p>
+
+        <br />
+
+        <a href="/userData">
+          <button>Show Users</button>
+        </a>
+
+        <br /><br />
+
+        <a href="/">
+          <button>Add User</button>
+        </a>
+      </div>
+    </div>
+
+    <%- include("partials/footer") %>
+  </body>
+</html>

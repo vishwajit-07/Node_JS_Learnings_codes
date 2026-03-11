@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <%- include("partials/header") %>
+        <div class="table-container">
+            <div style="display:flex;justify-content:space-between;margin-bottom:20px">
+                <h2>Users</h2>
+                <a href="/" class="add-btn">Add User</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(data.length> 0){ %>
+                        <% data.forEach((user,idx)=>{ %>
+                            <tr>
+                                <td>
+                                    <%= idx+1 %>
+                                </td>
+                                <td>
+                                    <%= user.name %>
+                                </td>
+                                <td>
+                                    <%= user.username %>
+                                </td>
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td>
+                                    <%= user.contact %>
+                                </td>
+                                <td>
+                                    <a onclick="return window.confirm('Are you sure ?')" href="/delete/<%= user._id %>"
+                                        class="delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;">No data found</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        <%- include("partials/footer") %>
+</body>
+</html>

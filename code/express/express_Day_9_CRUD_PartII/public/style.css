@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  background: #fafafa;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  color: #262626;
+}
+
+.navbar {
+  height: 60px;
+  background: white;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #262626;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #0095f6;
+}
+
+.container {
+  width: 400px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.card {
+  background: white;
+  padding: 35px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #0095f6;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1877f2;
+}
+
+.table-container {
+  width: 900px;
+  margin: auto;
+  margin-top: 50px;
+  background: white;
+  border: 1px solid #dbdbdb;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.add-btn {
+  background: #0095f6;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.delete {
+  color: red;
+  font-size: 18px;
+}
+.footer {
+  margin-top: 80px;
+  text-align: center;
+  padding: 30px 0;
+  color: #8e8e8e;
+  font-size: 14px;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  margin: 0 8px;
+  text-decoration: none;
+  color: #8e8e8e;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-copy {
+  margin-top: 8px;
+}
