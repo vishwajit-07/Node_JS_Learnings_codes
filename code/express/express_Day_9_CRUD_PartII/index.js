@@ -50,6 +50,29 @@ app.get("/delete/:id", async (req, res) => {
   }
 });
 
+app.get("/edit/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await userSchema.findById(id);
+    const obj = { data: result };
+    res.render("edit.ejs", obj);
+  } catch (error) {
+    res.send("<h2>Internal Server Error</h2>");
+    console.log(error);
+  }
+});
+
+app.post("/update/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    await userSchema.findByIdAndUpdate(id, req.body);
+    res.redirect("/userData");
+  } catch (error) {
+    res.send("<h2>Internal Server Error</h2>");
+    console.log(error);
+  }
+});
+
 app.use((req, res) => {
   res.render("404.ejs");
 });

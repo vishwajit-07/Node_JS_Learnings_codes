@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/style.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+
+    <div class="container">
+      <div class="card">
+        <h2 style="text-align: center; margin-bottom: 20px">Edit User</h2>
+
+        <form action="/update/<%= data._id %>" method="POST">
+          <input type="hidden" name="id" value="<%= data._id %>" />
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value="<%= data.name %>"
+          />
+
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value="<%= data.username %>"
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value="<%= data.email %>"
+          />
+
+          <input
+            type="text"
+            name="contact"
+            placeholder="Contact"
+            value="<%= data.contact %>"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value="<%= data.password %>"
+          />
+          <button>Update</button>
+        </form>
+      </div>
+    </div>
+
+    <%- include("partials/footer") %>
+  </body>
+</html>
