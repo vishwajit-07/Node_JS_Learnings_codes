@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Car</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        background: #f4f6f9;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #ff3f6c;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #e6325f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Add New Car</h2>
+
+      <form action="/saveCar" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="carName" required />
+        </div>
+
+        <div class="form-group">
+          <label>Brand</label>
+          <input type="text" name="brand" required />
+        </div>
+
+        <div class="form-group">
+          <label>Model</label>
+          <input type="text" name="model" required />
+        </div>
+
+        <div class="form-group">
+          <label>Year</label>
+          <input type="number" name="year" />
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" name="price" />
+        </div>
+
+        <div class="form-group">
+          <label>Fuel Type</label>
+          <input type="text" name="fuelType" />
+        </div>
+
+        <div class="form-group">
+          <label>Transmission</label>
+          <input type="text" name="transmission" />
+        </div>
+
+        <div class="form-group">
+          <label>Mileage</label>
+          <input type="number" name="mileage" />
+        </div>
+
+        <div class="form-group">
+          <label>Color</label>
+          <input type="text" name="colors" />
+        </div>
+
+        <div class="form-group">
+          <label>Engine</label>
+          <input type="text" name="engine" />
+        </div>
+
+        <div class="form-group">
+          <label>Seating Capacity</label>
+          <input type="number" name="seatingCapacity" />
+        </div>
+
+        <div class="form-group">
+          <label>Car Image</label>
+          <input type="file" name="carImage" accept="image/*" required />
+        </div>
+
+        <div class="form-group">
+          <label>Available</label>
+          <select name="isAvailable">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+
+        <button type="submit">Save Car</button>
+      </form>
+    </div>
+  </body>
+</html>

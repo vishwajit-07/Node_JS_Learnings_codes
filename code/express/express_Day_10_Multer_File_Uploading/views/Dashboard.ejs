@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Car Dashboard</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+header{
+    background:white;
+    padding:18px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+header h2{
+    margin:0;
+    color:#333;
+}
+
+header a{
+    background:#ff3f6c;
+    color:white;
+    padding:10px 18px;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.container{
+    padding:40px 60px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.car-img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:18px;
+}
+
+.car-name{
+    font-size:18px;
+    font-weight:bold;
+    color:#222;
+}
+
+.brand{
+    font-size:14px;
+    color:#777;
+    margin:5px 0 10px;
+}
+
+.specs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.spec{
+    background:#eef1f5;
+    padding:6px 10px;
+    font-size:12px;
+    border-radius:5px;
+}
+
+.price{
+    margin-top:12px;
+    font-size:20px;
+    font-weight:bold;
+    color:#ff3f6c;
+}
+
+.actions{
+    margin-top:15px;
+    display:flex;
+    gap:10px;
+}
+
+.actions a{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    padding:8px;
+    border-radius:5px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.edit{
+    background:#3498db;
+    color:white;
+}
+
+.delete{
+    background:#e74c3c;
+    color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Car Dashboard</h2>
+<a href="/addCar">+ Add New Car</a>
+</header>
+
+<div class="container">
+
+<% if(!data || data.length===0){ %>
+
+<div style="grid-column:span 4;text-align:center;font-size:22px;color:#777;">
+No Cars In Stock
+</div>
+
+<% } else { %>
+
+<% data.forEach(function(car){ %>
+
+<div class="card">
+
+<img class="car-img" src="/upload/<%= car.carImage %>">
+
+<div class="card-body">
+
+<div class="car-name">
+<%= car.name %>
+</div>
+
+<div class="brand">
+<%= car.brand %> • <%= car.model %>
+</div>
+
+<div class="specs">
+<div class="spec"><%= car.year %></div>
+<div class="spec"><%= car.fuelType %></div>
+<div class="spec"><%= car.transmission %></div>
+<div class="spec"><%= car.mileage %> km</div>
+</div>
+
+<div class="price">
+₹ <%= car.price %>
+</div>
+
+<div class="actions">
+
+<a class="edit" href="/edit/<%= car._id %>">Edit</a>
+
+<a class="delete" href="/delete/<%= car._id %>" onclick="return confirm('Delete Car?')">
+Delete
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<% }) %>
+
+<% } %>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Car</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        background: #f4f6f9;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #ff3f6c;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Edit Car</h2>
+
+      <form
+        action="/update/<%= data._id %>"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" value="<%= data.carName %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Brand</label>
+          <input type="text" name="brand" value="<%= data.brand %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Model</label>
+          <input type="text" name="model" value="<%= data.model %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Year</label>
+          <input type="number" name="year" value="<%= data.year %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" name="price" value="<%= data.price %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Fuel Type</label>
+          <input type="text" name="fuelType" value="<%= data.fuelType %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Transmission</label>
+          <input
+            type="text"
+            name="transmission"
+            value="<%= data.transmission %>"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Mileage</label>
+          <input type="number" name="mileage" value="<%= data.mileage %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Color</label>
+          <input type="text" name="color" value="<%= data.colors %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Engine</label>
+          <input type="text" name="engine" value="<%= data.engine %>" />
+        </div>
+
+        <div class="form-group">
+          <label>Seating Capacity</label>
+          <input
+            type="number"
+            name="seatingCapacity"
+            value="<%= data.seatingCapacity %>"
+          />
+        </div>
+        <div class="form-group">
+          <label>Car Image</label>
+          <input
+            type="file"
+            name="carImage"
+            accept="image/*"
+            value="<%= data.carImage %>"
+          />
+
+          <img src="/upload/<%= data.carImage %>" width="120" />
+        </div>
+
+        <button type="submit">Update Car</button>
+      </form>
+    </div>
+  </body>
+</html>
