@@ -157,6 +157,45 @@ app.post("/addPost", upload.single("post"), async (req, res) => {
   }
 });
 
+app.get("/myContent", async (req, res) => {
+  try {
+    if (!req.session.loginID) {
+      return res.send(
+        `<script>alert('Session expired!!'); window.location.assign('/')</script>`,
+      );
+    }
+    const posts = await postSchema.find({ userId: req.session.loginID });
+    const stories = await storySchema.find({ userId: req.session.loginID });
+    const obj = { posts: posts, stories: stories };
+    res.render("myContent.ejs", obj);
+  } catch (error) {
+    res.send("Internal Server Error");
+    console.log(error);
+  }
+});
+
+app.get("/deletePost/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    await postSchema.findByIdAndDelete(id);
+    res.redirect("/myContent");
+  } catch (error) {
+    res.send("Internal Server Error");
+    console.log(error);
+  }
+});
+
+app.get("/deleteStory/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    await storySchema.findByIdAndDelete(id);
+    res.redirect("/myContent");
+  } catch (error) {
+    res.send("Internal Server Error");
+    console.log(error);
+  }
+});
+
 app.get("/logout", (req, res) => {
   req.session.destroy;
   return res.send(
