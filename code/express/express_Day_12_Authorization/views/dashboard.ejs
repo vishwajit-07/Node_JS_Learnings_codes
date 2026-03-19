@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+      body {
+        background: #fafafa;
+        overflow: hidden;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 25%;
+        height: 100vh;
+        background: linear-gradient(180deg, #833ab4, #fd1d1d, #fcb045);
+        color: white;
+        padding: 20px;
+      }
+
+      .profile-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid white;
+      }
+
+      .right-panel {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 25%;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .feed {
+        margin-left: 25%;
+        margin-right: 25%;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .stories-container {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 10px;
+        align-items: center;
+      }
+
+      .stories-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .story {
+        min-width: 70px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        padding: 3px;
+        background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+        cursor: pointer;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .story video {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid white;
+      }
+
+      .post-card {
+        background: white;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .post-media {
+        width: 100%;
+        height: 350px;
+        overflow: hidden;
+        border-radius: 10px;
+      }
+
+      .post-media img,
+      .post-media video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      #storyModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      #storyPlayer {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+      }
+
+      #closeBtn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
+      .post-actions {
+  display: flex;
+  gap: 15px;
+  font-size: 22px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.post-actions i:hover {
+  transform: scale(1.2);
+  transition: 0.2s;
+}
+    </style>
+  </head>
+
+  <body>
+
+    <div class="sidebar">
+      <h4>Instagram </h4>
+      <hr />
+      <div class="text-center">
+        <img src="/uploads/<%= data.profile %>" class="profile-img" />
+        <h5 class="mt-2"><%= data.name %></h5>
+        <p>@<%= data.username %></p>
+        <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+      </div>
+    </div>
+
+    <div class="feed">
+        <h6>Stories</h6>
+
+      <div class="stories-container mb-4">
+        
+        <% if (stories && stories.length > 0) { %>
+          <% stories.forEach(s => { %>
+
+            <div class="story" onclick="openStory('<%= s.story %>')">
+              <video muted preload="metadata">
+                <source src="/uploads/<%= s.story %>">
+              </video>
+            </div>
+
+          <% }) %>
+        <% } else { %>
+          <p>No stories available</p>
+        <% } %>
+      </div>
+
+                   <h6>Posts</h6>
+
+      <% if (posts && posts.length > 0) { %>
+        <% posts.forEach(p => { %>
+
+          <div class="post-card">
+
+            <div class="d-flex align-items-center mb-2">
+              <img 
+                src="/uploads/<%= p.userId?.profile || 'default.jpg' %>"
+                style="width:40px;height:40px;border-radius:50%;object-fit:cover;"
+              >
+              <strong class="ms-2">@<%= p.userId?.username || 'user' %></strong>
+            </div>
+
+            <h6><%= p.title %></h6>
+            <p><%= p.caption %></p>
+
+            <div class="post-media">
+              <% const isVideo = /\.(mp4|webm|ogg)$/i.test(p.post); %>
+
+              <% if (isVideo) { %>
+                <video controls>
+                  <source src="/uploads/<%= p.post %>">
+                </video>
+              <% } else { %>
+                <img src="/uploads/<%= p.post %>">
+              <% } %>
+            </div>
+<div class="post-actions">
+  <i class="bi bi-heart"></i>
+  <i class="bi bi-chat"></i>
+  <i class="bi bi-send"></i>
+</div>
+
+          </div>
+
+        <% }) %>
+      <% } else { %>
+        <p>No posts available</p>
+      <% } %>
+
+    </div>
+
+    <div class="right-panel">
+
+      <div class="card p-3 mb-4">
+        <h6>Add Story 🎥</h6>
+
+        <form action="/addStory" method="POST" enctype="multipart/form-data">
+          <input type="text" name="caption" class="form-control mb-2" placeholder="Add caption" required>
+          <input type="file" name="story" class="form-control mb-2" accept="video/*" required>
+
+          <button class="btn w-100 text-white"
+            style="background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);">
+            Upload
+          </button>
+        </form>
+      </div>
+
+      <div class="card p-3">
+        <h6>Create Post 📸</h6>
+
+        <form action="/addPost" method="POST" enctype="multipart/form-data">
+          <input type="text" name="title" class="form-control mb-2" placeholder="Add Title" required>
+          <textarea name="caption" class="form-control mb-2" placeholder="Add caption" required></textarea>
+          <input type="file" name="post" class="form-control mb-2" accept="image/*" required>
+
+          <button class="btn w-100 text-white"
+            style="background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);">
+            Post
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <div id="storyModal">
+      <video id="storyPlayer" controls autoplay></video>
+      <button id="closeBtn" onclick="closeStory()">✖</button>
+    </div>
+
+    <script>
+      function openStory(videoFile) {
+        const modal = document.getElementById("storyModal");
+        const player = document.getElementById("storyPlayer");
+
+        player.src = "/uploads/" + videoFile;
+        modal.style.display = "flex";
+        player.play();
+      }
+
+      function closeStory() {
+        const modal = document.getElementById("storyModal");
+        const player = document.getElementById("storyPlayer");
+
+        player.pause();
+        player.src = "";
+        modal.style.display = "none";
+      }
+    </script>
+
+  </body>
+</html>
