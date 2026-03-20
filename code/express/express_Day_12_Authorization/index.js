@@ -99,16 +99,68 @@ app.post("/signup", upload.single("profile"), async (req, res) => {
     if (!name || !email || !username || !phone || !password) {
       return res.send("All fields are mandatory!!");
     }
-    const hashPassword = await bcrypt.hash(password, 10);
-    const userData = { name, email, username, phone, password: hashPassword };
+    const userData = { name, email, username, phone, password };
     if (req.file) {
       userData.profile = req.file.filename;
     }
-    const result = new userSchema(userData);
-    await result.save();
-    return res.send(
-      `<script>alert('Registered Successfully'); window.location.assign('/')</script>`,
-    );
+
+    req.session.userData = userData;
+    const otp = Math.floor(1000 + Math.random() * 9000);
+    req.session.OTP = otp;
+    res.send(`<script>
+  alert('Your OTP is : ${otp}');
+  window.location.href = "/otppage  ";
+</script>`);
+
+    // const hashPassword = await bcrypt.hash(password, 10);
+
+    // const result = new userSchema(userData);
+    // await result.save();
+    // return res.send(
+    //   `<script>alert('Registered Successfully'); window.location.assign('/')</script>`,
+    // );
+  } catch (error) {
+    res.send("Internal Server Error");
+    console.log(error);
+  }
+});
+
+app.get("/otppage", (req, res) => {
+  res.render("otppage.ejs");
+});
+
+app.post("/otpverify", async (req, res) => {
+  try {
+    const { otpvalue } = req.body;
+    const userenterd_otp = otpvalue.join("");
+
+    if (userenterd_otp == req.session.OTP) {
+      const { name, email, username, phone, password, profile } =
+        req.session.userData;
+
+      const hashPassword = await bcrypt.hash(password, 10);
+      const result = new userSchema({
+        name,
+        email,
+        username,
+        phone,
+        password: hashPassword,
+        profile: profile || null,
+      });
+      await result.save();
+
+      res.send(
+        `<script>alert('Successfully Registered!!!');
+      window.location.assign('/');
+      </script>`,
+      );
+    } else {
+      res.send(
+        `<script>alert('You entered wrong OTP : ${userenterd_otp} Original OTP is : ${req.session.OTP}');
+      window.location.assign('/otppage');
+      </script>`,
+      );
+    }
   } catch (error) {
     res.send("Internal Server Error");
     console.log(error);
@@ -202,6 +254,7 @@ app.get("/logout", (req, res) => {
     `<script>alert('Logout Successfully'); window.location.assign('/')</script>`,
   );
 });
+
 app.listen(PORT, HOST, () => {
   console.log(`http://${HOST}:${PORT}`);
 });
