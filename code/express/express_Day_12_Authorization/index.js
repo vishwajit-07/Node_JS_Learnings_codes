@@ -4,11 +4,13 @@ const bcrypt = require("bcryptjs");
 
 app.use(express.static("public/"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const connection = require("./config/db");
 const userSchema = require("./model/userSchema");
 const postSchema = require("./model/postSchema");
 const storySchema = require("./model/storySchema");
+const sendMail = require("./sendMail");
 
 const HOST = "127.1.1.0";
 const PORT = 3000;
@@ -48,6 +50,9 @@ app.get("/dashboard", async (req, res) => {
   }
 });
 
+// **************************************************************************************************
+//login traditional username + password
+
 app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -80,6 +85,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
+//  **************************************************************************************************************
+
 app.get("/signup", (req, res) => {
   res.render("signup.ejs");
 });
@@ -107,10 +114,11 @@ app.post("/signup", upload.single("profile"), async (req, res) => {
     req.session.userData = userData;
     const otp = Math.floor(1000 + Math.random() * 9000);
     req.session.OTP = otp;
-    res.send(`<script>
-  alert('Your OTP is : ${otp}');
-  window.location.href = "/otppage  ";
-</script>`);
+
+    sendMail(email, otp);
+    req.session.OTP_EXPIRE = Date.now() + 2 * 60 * 1000;
+
+    res.redirect("/otppage");
 
     // const hashPassword = await bcrypt.hash(password, 10);
 
@@ -119,6 +127,8 @@ app.post("/signup", upload.single("profile"), async (req, res) => {
     // return res.send(
     //   `<script>alert('Registered Successfully'); window.location.assign('/')</script>`,
     // );
+
+    // req.session.OTP_EXPIRE = Date.now() + 2 * 60 * 1000; // 2 minutes
   } catch (error) {
     res.send("Internal Server Error");
     console.log(error);
@@ -131,6 +141,13 @@ app.get("/otppage", (req, res) => {
 
 app.post("/otpverify", async (req, res) => {
   try {
+    const expiry = req.session.OTP_EXPIRE;
+    if (Date.now() > expiry) {
+      return res.send(
+        `<script>alert('OTP expired ⏱ Please request new one.');
+        window.location.assign('/signup');</script>`,
+      );
+    }
     const { otpvalue } = req.body;
     const userenterd_otp = otpvalue.join("");
 
@@ -166,6 +183,69 @@ app.post("/otpverify", async (req, res) => {
     console.log(error);
   }
 });
+
+// *************************************************************************************
+// Login using OTP
+
+app.get("/OTPlogin", (req, res) => {
+  res.render("OTPlogin.ejs");
+});
+
+app.post("/verifyOTP", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await userSchema.findOne({ email });
+
+    if (!user) {
+      return res.send("User Not Found!");
+    }
+
+    const OTP = Math.floor(100000 + Math.random() * 900000);
+
+    req.session.loginID = user._id;
+    req.session.OTP = OTP;
+    req.session.OTP_EXPIRE = Date.now() + 2 * 60 * 1000;
+
+    await sendMail(email, OTP);
+
+    res.send(`<script>alert('OTP Sent!');</script>`);
+  } catch (error) {
+    console.log(error);
+    res.send("Internal Server Error");
+  }
+});
+
+app.post("/verifyAccount", async (req, res) => {
+  try {
+    const { otp } = req.body;
+
+    if (!req.session.OTP || !req.session.loginID) {
+      return res.send("Session expired");
+    }
+
+    if (Date.now() > req.session.OTP_EXPIRE) {
+      return res.send("OTP expired");
+    }
+
+    if (otp != req.session.OTP) {
+      return res.send("Invalid OTP");
+    }
+
+    delete req.session.OTP;
+    delete req.session.OTP_EXPIRE;
+
+    res.send(`<script>
+      alert('Login Successful');
+      window.location.assign('/dashboard');
+    </script>`);
+  } catch (error) {
+    console.log(error);
+    res.send("Internal Server Error");
+  }
+});
+
+// ********************************************************************************************
 
 app.post("/addStory", upload.single("story"), async (req, res) => {
   try {

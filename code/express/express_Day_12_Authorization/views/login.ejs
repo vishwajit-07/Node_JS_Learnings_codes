@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      height: 100vh;
-      background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: sans-serif;
-    }
-    .card {
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    }
-  </style>
-</head>
-<body>
+  <head>
+    <title>Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        height: 100vh;
+        background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      .card {
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card p-4" style="width: 350px">
+      <h3 class="text-center mb-3">Instagram</h3>
+      <a href="/OTPlogin">OTP Login</a>
 
-<div class="card p-4" style="width:350px;">
-  <h3 class="text-center mb-3"> Instagram</h3>
+      <form action="/login" method="POST">
+        <input
+          name="username"
+          class="form-control mb-2"
+          placeholder="Username"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          class="form-control mb-3"
+          placeholder="Password"
+          required
+        />
+        <button class="btn btn-dark w-100">Login</button>
+      </form>
 
-  <form action="/login" method="POST">
-    <input name="username" class="form-control mb-2" placeholder="Username" required>
-    <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
-    <button class="btn btn-dark w-100">Login</button>
-  </form>
-
-  <p class="text-center mt-3">No account? <a href="/signup">Signup</a></p>
-</div>
-
-</body>
+      <p class="text-center mt-3">No account? <a href="/signup">Signup</a></p>
+    </div>
+  </body>
 </html>
