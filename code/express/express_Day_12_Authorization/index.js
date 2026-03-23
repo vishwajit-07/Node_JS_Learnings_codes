@@ -201,7 +201,7 @@ app.post("/verifyOTP", async (req, res) => {
       return res.send("User Not Found!");
     }
 
-    const OTP = Math.floor(100000 + Math.random() * 900000);
+    const OTP = Math.floor(1000 + Math.random() * 9000);
 
     req.session.loginID = user._id;
     req.session.OTP = OTP;
