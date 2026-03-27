@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Login with OTP</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        height: 100vh;
+        background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
+
+      .card {
+        width: 350px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-warning {
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card p-4 text-center">
+      <h3 class="mb-3">Login with OTP</h3>
+
+      <form action="/verifyAccount" method="POST">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control mb-2"
+          placeholder="Enter Email"
+          required
+        />
+
+        <div class="d-flex gap-2 mb-3">
+          <input
+            type="text"
+            id="otp"
+            name="otp"
+            class="form-control"
+            placeholder="Enter OTP"
+            required
+          />
+
+          <button type="button" id="getOtpBtn" class="btn btn-warning">
+            Get OTP
+          </button>
+        </div>
+
+        <button type="submit" id="verifyBtn" class="btn btn-success w-100">
+          Verify & Login
+        </button>
+      </form>
+    </div>
+
+    <script>
+      const emailInput = document.getElementById("email");
+      const otpInput = document.getElementById("otp");
+      const getOtpBtn = document.getElementById("getOtpBtn");
+      const verifyBtn = document.getElementById("verifyBtn");
+
+      emailInput.addEventListener("input", () => {
+        getOtpBtn.disabled = emailInput.value.trim() === "";
+      });
+
+      async function sendOTP() {
+        const email = emailInput.value;
+
+        if (!email) {
+          alert("Enter email first");
+          return;
+        }
+
+        try {
+          getOtpBtn.innerText = "Sending...";
+          getOtpBtn.disabled = true;
+
+          const res = await fetch("/verifyOTP", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          });
+
+          const data = await res.text();
+          alert(data);
+
+          otpInput.disabled = false;
+          verifyBtn.disabled = false;
+
+          getOtpBtn.innerText = "Sent";
+        } catch (error) {
+          alert("Error sending OTP");
+          getOtpBtn.innerText = "Get OTP";
+          getOtpBtn.disabled = false;
+        }
+      }
+
+      getOtpBtn.addEventListener("click", sendOTP);
+    </script>
+  </body>
+</html>
